@@ -1,18 +1,12 @@
 const axios = require("axios");
-const { auth } = require("../axiosInstance");
 
-/**
- * 登录到turtlesim账户
- * @param {string} username - 用户名（邮箱），匿名登录请留空
- * @param {string} password - 密码，匿名登录请留空
- * @return {string} token
- */
-module.exports = async function login(username = null, password = null) {
+
+module.exports = async function login() {
   const response = await axios.post(
     "http://physics-api-cn.turtlesim.com/Users/Authenticate",
     {
-      Login: username,
-      Password: password,
+      Login: this.username,
+      Password: this.password,
       Version: 2411,
       Device: {
         ID: null,
@@ -42,8 +36,8 @@ module.exports = async function login(username = null, password = null) {
     }
   );
   if (response.data.Status === 200) {
-    auth.token = response.data.Token;
-    auth.authCode = response.data.AuthCode;
+    this.token = response.data.Token;
+    this.authCode = response.data.AuthCode;
     return response.data;
   } else {
     if (response.status != 200) console.error("服务器连接失败");

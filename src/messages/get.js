@@ -1,5 +1,4 @@
-const { plrequest } = require("../axiosInstance");
-
+const plrequest = require("../../src/axiosInstance.js");
 /**
  * 获取留言/评论信息，部分作品需要非匿名登录（传入用户名和密码）
  *
@@ -18,13 +17,25 @@ module.exports = async function getMessages(
   skip = 0
 ) {
   try {
-    const response = await plrequest.post("/Messages/GetComments", {
-      TargetID: ID,
-      TargetType: type,
-      CommentID: from,
-      Take: take,
-      Skip: skip,
-    });
+    const response = await plrequest.post(
+      "/Messages/GetComments",
+      {
+        TargetID: ID,
+        TargetType: type,
+        CommentID: from,
+        Take: take,
+        Skip: skip,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Language": "zh-CN",
+          "x-API-Token": this.token,
+          "x-API-AuthCode": this.authCode,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);

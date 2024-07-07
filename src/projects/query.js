@@ -1,5 +1,4 @@
-const { plrequest } = require("../axiosInstance");
-
+const plrequest = require("../../src/axiosInstance.js");
 /**
  * 按照要求筛选实验区作品列表，需要登录
  *
@@ -12,29 +11,42 @@ const { plrequest } = require("../axiosInstance");
  * @param {number} [query.skip=0] - 跳过的数量
  * @return {*}
  */
-module.exports = async function queryExperiments(type,query) {
+module.exports = async function queryExperiments(type, query) {
   try {
-    const response = await plrequest.post("/Contents/QueryExperiments", {
-      Query: {
-        Category: type,
-        Languages: [],
-        ExcludeLanguages: null,
-        Tags: [],
-        ModelTags: null,
-        ExcludeTags: null,
-        ModelID: null,
-        ParentID: null,
-        UserID: null,
-        Special: null,
-        From: null,
-        Skip: 0,
-        Take: 8,
-        Days: 0,
-        Sort: 0,
-        ShowAnnouncement: false,
-        ...query, //覆盖默认值,
+    const response = await plrequest.post(
+      "/Contents/QueryExperiments",
+      {
+        Query: {
+          Category: type,
+          Languages: [],
+          ExcludeLanguages: null,
+          Tags: [],
+          ModelTags: null,
+          ExcludeTags: null,
+          ModelID: null,
+          ParentID: null,
+          UserID: null,
+          Special: null,
+          From: null,
+          Skip: 0,
+          Take: 8,
+          Days: 0,
+          Sort: 0,
+          ShowAnnouncement: false,
+          ...query, //覆盖默认值,
+        },
       },
-    });
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Language": "zh-CN",
+          "x-API-Token": this.token,
+          "x-API-AuthCode": this.authCode,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);

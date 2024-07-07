@@ -1,9 +1,8 @@
 ## 可用 API 列表
 
-### user
+### auth
 
 - login: 登录物实账号（不支持第三方登录），返回活动信息+个人账号信息(username,password)
-- getToken: 获取用户 token，后续请求要用（可匿名）(username,password)
 
 ### messages
 

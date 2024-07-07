@@ -1,12 +1,14 @@
-const pl = require("../src/index");
+const User = require("../src/index");
 
 async function main() {
-  await pl.user.login();
-  const re = await pl.projects.query("Discussion",{
+  const user = new User("xiegushi2022@outlook.com","***")
+  await user.auth.login();
+  console.log(user);
+  const re = await user.projects.query("Discussion",{
     tags: ["精选"],
     take: 1,
   });
-  console.log(re.Data.$values);
+  console.log(re);
 }
-
 main();
+
