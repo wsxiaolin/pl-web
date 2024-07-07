@@ -19,7 +19,7 @@ class User {
       });
   }
   test() {
-    test.bind(this);
+    test();
   }
 }
 

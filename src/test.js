@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const { exec } = require("child_process");
 
-console.log(path.join(__dirname, "__tests__"));
 
 function test() {
   const plTestsDir = "./pl-tests";

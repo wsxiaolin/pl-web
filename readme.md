@@ -17,9 +17,8 @@ npm install physics-lab-web-api
 创建文件执行以下代码创建测试目录，接着按照提示运行 jest
 
 ```
-const User = require("physics-lab-web-api");
-const user = new User(username,password)
-user.test()
+const PL = require("physics-lab-web-api")
+PL.test()
 ```
 
 ## 使用方法
