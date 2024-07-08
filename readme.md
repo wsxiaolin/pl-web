@@ -25,6 +25,8 @@ PL.test()
 
 欢迎使用 physics-lab-web-api（以下简称 plapi）在导入相关包后，可以直接调用相关方法，在[方法列表](apilist.md)内查看方法列表，您也可以参考[api 接口文档](https://github.com/wsxiaolin/apidoc.git)的内容，文档内容不保证正确，本接口内容保证已经测试通过
 
+### pl.USer
+
 new 的时候请传入用户名和密码，未传参数自动进行匿名登录，部分功能可能会有限制），注意**不是在Login的时候传参**
 
 由于物实接口返回内容比较复杂，**强烈建议大家自己打印一下返回内容**
@@ -34,7 +36,7 @@ new 的时候请传入用户名和密码，未传参数自动进行匿名登录�
 示例代码（更多请查看 examples 文件夹，会和包一起安装，放在插件目录下）：
 
 ```javascript
-const User = require("physics-lab-web-api");
+const User = require("physics-lab-web-api").User;
 
 async function main() {
   const user = new User();
@@ -47,3 +49,7 @@ async function main() {
 }
 main();
 ```
+
+### pl.Bot
+
+还在开发中...

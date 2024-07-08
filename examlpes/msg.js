@@ -1,4 +1,4 @@
-const User = require("../src/index");
+const User = require("../src/index").User;
 
 async function get() {
   const user = new User()

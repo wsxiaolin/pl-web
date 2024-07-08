@@ -1,4 +1,4 @@
-const User = require("../src/index");
+const User = require("../src/index").User;
 
 describe("User", () => {
   describe("getMessages function", () => {

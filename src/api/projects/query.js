@@ -1,4 +1,4 @@
-const plrequest = require("../../src/axiosInstance.js");
+const plrequest = require("../../api/axiosInstance");
 /**
  * 按照要求筛选实验区作品列表，需要登录
  *

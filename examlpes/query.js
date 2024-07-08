@@ -1,4 +1,4 @@
-const User = require("../src/index");
+const User = require("../src/index").User;
 
 async function main() {
   const user = new User("xiegushi2022@outlook.com", "***");

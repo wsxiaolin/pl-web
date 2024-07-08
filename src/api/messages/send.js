@@ -1,4 +1,4 @@
-const plrequest = require("../../src/axiosInstance.js");
+const plrequest = require("../../api/axiosInstance");
 
 module.exports = async function getMessages(
   TargetID,
