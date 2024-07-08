@@ -1,5 +1,6 @@
 const login = require("./auth/login");
 const getMessages = require("./messages/get");
+const sendMessages = require("./messages/send");
 const query = require("./projects/query");
 const test = require("./test");
 
@@ -10,6 +11,7 @@ class User {
 
     this.messages = {
       get: getMessages.bind(this),
+      comment: sendMessages.bind(this),
     };
     (this.auth = {
       login: login.bind(this),

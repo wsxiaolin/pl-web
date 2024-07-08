@@ -2,11 +2,12 @@
 
 ### auth
 
-- login: 登录物实账号（不支持第三方登录），返回活动信息+个人账号信息(username,password)
+- login: 登录物实账号（不支持第三方登录），返回活动信息+个人账号信息
 
 ### messages
 
 - get: 获取留言/评论，实验+讨论+用户留言板均可(ID,type,take,from,skip)
+- comment: 留言或评论(回复位置的ID,type,回复内容)
 
 ### projects
 
