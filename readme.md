@@ -16,10 +16,12 @@ npm install physics-lab-web-api
 
 创建文件执行以下代码创建测试目录，接着按照提示运行 jest
 
-```
+```javaScript
 const PL = require("physics-lab-web-api")
 PL.test()
 ```
+
+**目前已经放弃维护测试，安装后可以尝试运行/node_modules/physics-lab-web-api下examples下的文件**
 
 ## 使用方法
 
@@ -52,4 +54,26 @@ main();
 
 ### pl.Bot
 
-还在开发中...
+Bot继承自User，但是需要提供一些新的参数，标准流程如下：
+
+```javaScript
+const Bot = require("../src/index").Bot;
+
+async function processFunction(msg, botInstance) {
+  return "捕获成功";
+}
+
+const myBot = new Bot("xiegushi2022@outlook.com", "***", processFunction);
+
+async function main() {
+  await myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion");
+  myBot.start(5);
+}
+
+main();
+
+```
+
+- init传入的是回复的位置，为物实ID和类型（User,Experiment,Discussion）
+- 在调用start之后，首先会发布一条信息提示bot已经开始运行，之后会每隔参数时间获取一次监听位置的信息，并自动回复内容【注意：Bot会自动过滤无需回复的信息】【后续会考虑提供一些规则参数配置，类比eslint】【若没有需要回复的消息，控制台不会有任何输出】
+- processFunction会被传入评论对象和Bot实例，返回值会被直接发送到指定位置

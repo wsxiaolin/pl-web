@@ -1,6 +1,6 @@
 const plrequest = require("../../api/axiosInstance");
 
-module.exports = async function getMessages(
+module.exports = async function sendMessages(
   TargetID,
   Content,
   TargetType = "Discussion"
