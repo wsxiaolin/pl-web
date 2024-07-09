@@ -31,8 +31,10 @@ class Bot extends User {
         console.log("成功捕获到消息：", comment);
         this.pending.add(comment.ID);
         const reply = await this.processFunction(comment, this);
+        if (reply == "") continue;
+        const msg = `回复@${comment.Nickname}: ${reply}`;
         this.messages
-          .comment(this.targetID, reply, this.targetType)
+          .comment(this.targetID, msg, this.targetType, comment.UserID)
           .then(() => {
             that.finnish.add(comment.ID);
             that.pending.delete(comment.ID);

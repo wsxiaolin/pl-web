@@ -7,7 +7,7 @@
 ### messages
 
 - get: 获取留言/评论，实验+讨论+用户留言板均可(ID,type,take,from,skip)
-- comment: 留言或评论(回复位置的ID,type,回复内容)
+- comment: 留言或评论(回复位置的ID,type,回复内容,被回复的人的序列号)
 
 ### projects
 

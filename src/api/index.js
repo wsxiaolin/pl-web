@@ -6,8 +6,8 @@ const test = require("./test");
 
 class User {
   constructor(username, password) {
-    this.username = username || process?.env?.username || null;
-    this.password = password || process?.env?.password || null;
+    this.username = username || process?.env?.USERNAME || null;
+    this.password = password || process?.env?.PASSWORD || null;
 
     this.messages = {
       get: getMessages.bind(this),

@@ -3,7 +3,8 @@ const plrequest = require("../../api/axiosInstance");
 module.exports = async function sendMessages(
   TargetID,
   Content,
-  TargetType = "Discussion"
+  TargetType = "Discussion",
+  ReplyID = ''
 ) {
   try {
     const response = await plrequest.post(
@@ -12,7 +13,7 @@ module.exports = async function sendMessages(
         TargetID,
         TargetType,
         Language: "Chinese",
-        ReplyID: "",
+        ReplyID,
         Content,
         Special: null,
       },
