@@ -66,14 +66,22 @@ async function processFunction(msg, botInstance) {
 const myBot = new Bot("xiegushi2022@outlook.com", "***", processFunction);
 
 async function main() {
-  await myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion");
+  await myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{},);
   myBot.start(5);
 }
 
 main();
 
 ```
+##### init（带有*的仍然在开发）
 
-- init传入的是回复的位置，为物实ID和类型（User,Experiment,Discussion）
+前两个参数为回复的位置，为物实ID和类型（User,Experiment,Discussion）
+*第三个参数为信息捕获策略，目前可以留空
+第四个参数为机器人预制类型，可以填入name对应值，目前支持：
+|---|----|
+|name|名称|
+|wordel|猜词游戏机器人|
+*第五个参数为自定义回复策略
+
 - 在调用start之后，首先会发布一条信息提示bot已经开始运行，之后会每隔参数时间获取一次监听位置的信息，并自动回复内容【注意：Bot会自动过滤无需回复的信息】【后续会考虑提供一些规则参数配置，类比eslint】【若没有需要回复的消息，控制台不会有任何输出】
 - processFunction会被传入评论对象和Bot实例，返回值会被作为**回复用户**的内容

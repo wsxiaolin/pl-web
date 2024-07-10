@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const plrequest = axios.create({
   baseURL: "https://physics-api-cn.turtlesim.com",
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
