@@ -66,7 +66,7 @@ async function processFunction(msg, botInstance) {
 const myBot = new Bot("xiegushi2022@outlook.com", "***", processFunction);
 
 async function main() {
-  await myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{},);
+  await myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{});
   myBot.start(5);
 }
 
@@ -75,13 +75,35 @@ main();
 ```
 ##### init（带有*的仍然在开发）
 
-前两个参数为回复的位置，为物实ID和类型（User,Experiment,Discussion）
-*第三个参数为信息捕获策略，目前可以留空
-第四个参数为机器人预制类型，可以填入name对应值，目前支持：
-|---|----|
-|name|名称|
-|wordel|猜词游戏机器人|
-*第五个参数为自定义回复策略
+- 前两个参数为回复的位置，为物实ID和类型（User,Experiment,Discussion）
+- *第三个参数为信息捕获策略
+- 第四个参数为机器人预制类型
 
-- 在调用start之后，首先会发布一条信息提示bot已经开始运行，之后会每隔参数时间获取一次监听位置的信息，并自动回复内容【注意：Bot会自动过滤无需回复的信息】【后续会考虑提供一些规则参数配置，类比eslint】【若没有需要回复的消息，控制台不会有任何输出】
-- processFunction会被传入评论对象和Bot实例，返回值会被作为**回复用户**的内容
+直接上代码你就懂了：
+```JavaScript
+// 可选的机器人类型，只需填入name即可，例如：myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{},"wordle");
+const botTypes = [
+  {
+    name: "wordle",
+    process: wordle,
+    replyConfig: { replyRequired: false, readHistiry: false },
+  },
+];
+
+// 默认的信息捕获策略
+const defaltReplyConfig = {
+  ignoreReplyToOters: true, //忽略回复他人的信息
+  readHistiry: false, //是否读取开启前未回复的历史内容
+  replyRequired: true, // 是否只读取回复机器人的内容
+};
+```
+
+
+##### start
+
+在调用start之后，首先会发布一条信息提示bot已经开始运行，之后会每隔参数时间获取一次监听位置的信息，并自动回复内容【注意：Bot会自动过滤无需回复的信息】【后续会考虑提供一些规则参数配置，类比eslint】【若没有需要回复的消息，控制台不会有任何输出】
+
+##### processFunction
+
+会被传入评论对象和Bot实例，返回值会被作为**回复用户**的内容，但是**如果指定了Bottype，该函数会被覆盖，可以不传**
+优先级：机器人类型自带 > 用户配置 > 默认值
