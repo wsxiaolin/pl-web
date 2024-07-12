@@ -79,7 +79,7 @@ main();
 - *第三个参数为信息捕获策略
 - 第四个参数为机器人预制类型
 
-直接上代码你就懂了：
+直接上代码你就懂了，每个类型都有对应的介绍，对应逻辑实现都位于`node_modules/physics-lab-web-api/src/bot/`，里面可以在每个技能下方找到介绍.md：
 ```JavaScript
 // 可选的机器人类型，只需填入name即可，例如：myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{},"wordle");
 const botTypes = [

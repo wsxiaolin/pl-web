@@ -6,7 +6,7 @@ const botTypes = [
     name: "wordle",
     process: wordle,
     replyConfig: { replyRequired: false, readHistory: false },
-  },
+  }, 
 ];
 
 const defaltReplyConfig = {
@@ -57,7 +57,6 @@ class Bot extends User {
       for (let comment of msglist) {
         if (comment.UserID == this.botID) {
           index = comment.ID;
-          console.log(this.replyConfig);
         }
       }
       this.startIndex = index;
