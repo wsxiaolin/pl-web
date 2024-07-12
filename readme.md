@@ -86,14 +86,14 @@ const botTypes = [
   {
     name: "wordle",
     process: wordle,
-    replyConfig: { replyRequired: false, readHistiry: false },
+    replyConfig: { replyRequired: false, readHistory: false },
   },
 ];
 
 // 默认的信息捕获策略
 const defaltReplyConfig = {
   ignoreReplyToOters: true, //忽略回复他人的信息
-  readHistiry: false, //是否读取开启前未回复的历史内容
+  readHistiory: false, //是否读取开启前未回复的历史内容
   replyRequired: true, // 是否只读取回复机器人的内容
 };
 ```

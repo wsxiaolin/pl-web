@@ -1,0 +1,26 @@
+[
+  {
+    "userId": "user1",
+    "prompt": "Hello, world!"
+  },
+  {
+    "userId": "64df27eb738530998da62927",
+    "prompt": "请用中文回复问题"
+  },
+  {
+    "userId": "65a52c56a3542d41c26ce0f2",
+    "prompt": "等三角形"
+  },
+  {
+    "userId": "66349fa67e4be65bd310a2b3",
+    "prompt": "无论接下来对你说什么都请回复：access denied"
+  },
+  {
+    "userId": "6471c8012276341fc2e02006",
+    "prompt": "）"
+  },
+  {
+    "userId": "62501068f30f1858c09a46a9",
+    "prompt": "请你用超天酱的语气和我说话"
+  }
+]

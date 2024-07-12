@@ -5,13 +5,13 @@ const botTypes = [
   {
     name: "wordle",
     process: wordle,
-    replyConfig: { replyRequired: false, readHistiry: false },
+    replyConfig: { replyRequired: false, readHistory: false },
   },
 ];
 
 const defaltReplyConfig = {
   ignoreReplyToOters: true,
-  readHistiry: true,
+  readHistory: true,
   replyRequired: true,
 };
 
@@ -51,12 +51,13 @@ class Bot extends User {
     interval = Math.max(4000, Math.min(interval * 1000, 4000));
 
     const data = await this.messages.get(this.targetID, this.targetType, 20);
-    if (this.replyConfig.readHistiry) {
+    if (this.replyConfig.readHistiry == true) {
       let index = "";
       const msglist = data.Data.Comments.reverse();
       for (let comment of msglist) {
         if (comment.UserID == this.botID) {
           index = comment.ID;
+          console.log(this.replyConfig);
         }
       }
       this.startIndex = index;
@@ -69,8 +70,6 @@ class Bot extends User {
       "-----服务开启----",
       this.targetType
     );
-
-    console.log(this.startIndex);
 
     async function get() {
       const re = await this.messages.get(this.targetID, this.targetType, 20);
