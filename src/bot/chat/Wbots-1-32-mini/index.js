@@ -1,9 +1,8 @@
-const Locale = require("../src/bot/chat/locale");
+const Locale = require("../locale");
 const path = require("path");
-const Bot = require("../src/index").Bot;
 const axios = require("axios");
 
-const dataFilePath = path.join(__dirname, "Wbots-1-32-mini.json");
+const dataFilePath = path.join(__dirname, "data", "data.json");
 const prompts = new Locale(dataFilePath);
 
 async function _post(q, p, t) {
@@ -23,8 +22,8 @@ async function _post(q, p, t) {
     return re.data.response.response;
   } catch (error) {
     if (t >= 20) {
-      return error.message;
       console.error(error.message);
+      return error.message;
     } else {
       t++;
       console.log(t);
@@ -58,14 +57,5 @@ async function processFunction(msg) {
 
   return re;
 }
-const myBot = new Bot("", "", processFunction);
-async function main() {
-  await myBot.init("668d3bdb9e258e6b2f4fbaa4", "Discussion", {
-    replyRequired: false,
-    readHistory:false
-  });
-  myBot.start(5);
-}
-try {
-  main();
-} catch (error) {}
+
+module.exports = processFunction;

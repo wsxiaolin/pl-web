@@ -1,11 +1,17 @@
 const User = require("../api/index");
 const wordle = require("./game/wordle/index");
+const Wbotsmini = require("./chat/Wbots-1-32-mini")
 
 const botTypes = [
   {
     name: "wordle",
     process: wordle,
     replyConfig: { replyRequired: false, readHistory: false },
+  }, 
+  {
+    name: "Wbotsmini",
+    process:Wbotsmini,
+    replyConfig: { replyRequired: false, readHistory: true },
   }, 
 ];
 

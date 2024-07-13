@@ -84,10 +84,15 @@ main();
 // 可选的机器人类型，只需填入name即可，例如：myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{},"wordle");
 const botTypes = [
   {
-    name: "wordle",
+    name: "wordle", // 猜词游戏
     process: wordle,
     replyConfig: { replyRequired: false, readHistory: false },
-  },
+  }, 
+  {
+    name: "Wbotsmini", // 支持一定程度上设定提示词的bot
+    process:Wbotsmini,
+    replyConfig: { replyRequired: false, readHistory: true },
+  }, 
 ];
 
 // 默认的信息捕获策略
