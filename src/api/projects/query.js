@@ -2,8 +2,8 @@ const plrequest = require("../../api/axiosInstance");
 /**
  * 按照要求筛选实验区作品列表，需要登录
  *
+ * @param {Object} type - Discussion 或 Experiment
  * @param {Object} query - 查询参数对象
- * @param {Object} query - Discussion 或 Experiment
  * @param {Array} [query.tags=[]] - 选择的标签，数组之间为与关系，留空全选
  * @param {Array} [query.excludeTags=null] - 排除的标签
  * @param {number} [query.take=18] - 获取的数量

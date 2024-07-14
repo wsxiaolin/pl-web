@@ -16,6 +16,7 @@ module.exports = async function getMessages(
   from = null,
   skip = 0
 ) {
+  if (take > 24) throw new Error("消息获取数量一次最多为24条");
   try {
     const response = await plrequest.post(
       "/Messages/GetComments",

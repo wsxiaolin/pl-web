@@ -3,6 +3,7 @@ const getMessages = require("./messages/get");
 const sendMessages = require("./messages/send");
 const query = require("./projects/query");
 const test = require("./test");
+const getSummary = require("./projects/getSummary");
 
 class User {
   constructor(username, password) {
@@ -18,6 +19,7 @@ class User {
     }),
       (this.projects = {
         query: query.bind(this),
+        getSummary: getSummary.bind(this),
       });
   }
   test() {
