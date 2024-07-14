@@ -4,6 +4,7 @@ const sendMessages = require("./messages/send");
 const query = require("./projects/query");
 const test = require("./test");
 const getSummary = require("./projects/getSummary");
+const getDerivatives = require("./projects/getDerivatives");
 
 class User {
   constructor(username, password) {
@@ -20,6 +21,7 @@ class User {
       (this.projects = {
         query: query.bind(this),
         getSummary: getSummary.bind(this),
+        getDerivatives: getDerivatives.bind(this),
       });
   }
   test() {

@@ -15,3 +15,4 @@
 
 - query: 按照要求筛选作品列表，需要登录(type,query{tags,excludeTags,take,from,skip})
 - getSummary: 获取作品简略信息(id,type)
+- GetDerivatives: 获取作品简详细信息(id,type)
