@@ -5,6 +5,7 @@ const query = require("./projects/query");
 const test = require("./test");
 const getSummary = require("./projects/getSummary");
 const getDerivatives = require("./projects/getDerivatives");
+const getUser = require("./auth/getUser");
 
 class User {
   constructor(username, password) {
@@ -17,6 +18,7 @@ class User {
     };
     (this.auth = {
       login: login.bind(this),
+      getUser: getUser.bind(this),
     }),
       (this.projects = {
         query: query.bind(this),
