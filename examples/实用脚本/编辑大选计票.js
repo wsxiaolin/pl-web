@@ -1,4 +1,4 @@
-const User = require("../src/index").User;
+const User = require("../../src/index").User;
 
 // 这是一个示例代码，本意是用于编辑大选作品投票
 // 由于紫兰斋安全原因，最多只能获取到十个支持，故作废
