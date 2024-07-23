@@ -1,18 +1,18 @@
 const User = require("../api/index");
 const wordle = require("./game/wordle/index");
-const Wbotsmini = require("./chat/Wbots-1-32-mini")
+const Wbotsmini = require("./chat/Wbots-1-32-mini");
 
 const botTypes = [
   {
     name: "wordle",
     process: wordle,
     replyConfig: { replyRequired: false, readHistory: false },
-  }, 
+  },
   {
     name: "Wbotsmini",
-    process:Wbotsmini,
+    process: Wbotsmini,
     replyConfig: { replyRequired: false, readHistory: true },
-  }, 
+  },
 ];
 
 const defaltReplyConfig = {
@@ -57,7 +57,7 @@ class Bot extends User {
     interval = Math.max(4000, Math.min(interval * 1000, 4000));
 
     const data = await this.messages.get(this.targetID, this.targetType, 20);
-    if (this.replyConfig.readHistiry == true) {
+    if (this.replyConfig.readHistory == true) {
       let index = "";
       const msglist = data.Data.Comments.reverse();
       for (let comment of msglist) {
@@ -70,11 +70,7 @@ class Bot extends User {
       this.startIndex =
         data.Data.Comments.length >= 1 ? data.Data.Comments[0].ID : "";
     }
-    await this.messages.comment(
-      this.targetID,
-      "-----服务开启----",
-      this.targetType
-    );
+    console.info("服务开启");
 
     async function get() {
       const re = await this.messages.get(this.targetID, this.targetType, 20);
