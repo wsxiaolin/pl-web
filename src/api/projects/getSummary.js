@@ -1,6 +1,6 @@
 const plrequest = require("../axiosInstance");
 /**
- * 获取作品的介绍等信息，需要登录
+ * 获取作品的介绍等信息，物实遇到缓存过的作品会读取本接口
  *
  * @param {Object} id - 查询的作品序列号
  * @param {Object} type - Discussion 或 Experiment

@@ -1,9 +1,8 @@
 const plrequest = require("../axiosInstance");
 /**
- * 获取作品的介绍等信息，需要登录
+ * 获取用户信息（非当前登录用户）
  *
- * @param {Object} id - 查询的作品序列号
- * @param {Object} type - Discussion 或 Experiment
+ * @param {Object} id - 用户序列号
  */
 module.exports = async function getUser(id) {
   try {
