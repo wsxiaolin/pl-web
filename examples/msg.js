@@ -12,10 +12,10 @@ async function get() {
 
 
 async function send() {
-  const user = new User('xiegushi2022@outlook.com','***')
+  const user = new User()
   await user.auth.login();
   console.log(user.token);
-  const re = await user.messages.comment("60e933da4ad4cae147f48a66","回复","User")
+  const re = await user.messages.comment("64df27eb738530998da62927",user.messages.emoticons.huaji,"User")
   console.log(re);
 }
 

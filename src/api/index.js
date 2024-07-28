@@ -6,15 +6,23 @@ const test = require("./test");
 const getSummary = require("./projects/getSummary");
 const getDerivatives = require("./projects/getDerivatives");
 const getUser = require("./auth/getUser");
+const star = require("./projects/star");
+const emoticons = require("./messages/emoticons/index");
 
 class User {
   constructor(username, password) {
-    this.username = username || process?.env?.USERNAME || null;
-    this.password = password || process?.env?.PASSWORD || null;
+    if (username === null) {
+      this.username = null;
+      this.password = null;
+    } else {
+      this.username = username || process?.env?.USERNAME || null;
+      this.password = password || process?.env?.PASSWORD || null;
+    }
 
     this.messages = {
       get: getMessages.bind(this),
       comment: sendMessages.bind(this),
+      emoticons,
     };
     (this.auth = {
       login: login.bind(this),
@@ -24,6 +32,7 @@ class User {
         query: query.bind(this),
         getSummary: getSummary.bind(this),
         getDerivatives: getDerivatives.bind(this),
+        star: star.bind(this),
       });
   }
   test() {
