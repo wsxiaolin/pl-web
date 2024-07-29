@@ -101,7 +101,6 @@ async function cover(filename, c, i) {
 
     Promise.resolve();
   } catch (error) {
-    console.error("处理文件上传出错:", error.request);
     throw error;
   }
 }
