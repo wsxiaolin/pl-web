@@ -20,3 +20,4 @@
 - getSummary: 获取作品简略信息(id,type)
 - GetDerivatives: 获取作品简详细信息(id,type)
 - star: 收藏作品（可匿名）
+- cover: 更新封面
