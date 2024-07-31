@@ -1,11 +1,11 @@
-const axios = require("axios");
+const plrequest = require("../axiosInstance");
 
 /**
  * 登录接口，注意：用户名和密码应当在初始化的时候传入，而不是在这里
  */
 
 module.exports = async function login() {
-  const response = await axios.post(
+  const response = await plrequest.post(
     "http://physics-api-cn.turtlesim.com/Users/Authenticate",
     {
       Login: this.username,
