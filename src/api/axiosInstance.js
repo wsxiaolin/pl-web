@@ -35,7 +35,7 @@ plrequest.interceptors.response.use(function (response) {
       console.error("\x1b[31m%s\x1b[0m", response.data);
       console.log("请求URL:", requestConfig.url);
       console.log("请求头:", requestConfig.headers);
-      console.log("请求体:", requestConfig.data);
+      console.log("请求体:", JSON.parse(requestConfig.data));
     }
     throw new Error("physics-lab-web-api请求未成功");
   } else {

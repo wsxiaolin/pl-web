@@ -6,7 +6,7 @@ const plrequest = require("../axiosInstance");
 
 module.exports = async function login() {
   const response = await plrequest.post(
-    "http://physics-api-cn.turtlesim.com/Users/Authenticate",
+    "/Users/Authenticate",
     {
       Login: this.username,
       Password: this.password,

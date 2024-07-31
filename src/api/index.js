@@ -2,7 +2,6 @@ const login = require("./auth/login");
 const getMessages = require("./messages/get");
 const sendMessages = require("./messages/send");
 const query = require("./projects/query");
-const test = require("./test");
 const getSummary = require("./projects/getSummary");
 const getDerivatives = require("./projects/getDerivatives");
 const getUser = require("./auth/getUser");
@@ -37,9 +36,7 @@ class User {
         cover: cover.bind(this)
       });
   }
-  test() {
-    test();
-  }
+  
 }
 
 module.exports = User;

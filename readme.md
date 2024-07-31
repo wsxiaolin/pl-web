@@ -1,41 +1,32 @@
-# 物理实验室网络 API 接口
+# Physics Lab Network API Interface
 
-这是[物理实验室 APP](https://turtlesim.com/products/physics-lab/index-cn.html)的一些常用网络接口的封装，可用于自建脚本机器人、搜集作品数据等公开的个人信息
+This is a wrapper for some commonly used network interfaces of the [Physics Lab App](https://turtlesim.com/products/physics-lab), which can be used to build script bots, collect work data, and other publicly available personal information.
 
-## 安装
+## Installation
 
-使用 npm 进行安装：
+Install using npm:
 
 ```bash
 npm install physics-lab-web-api
 ```
 
-## 运行测试
+## Reference Examples
 
-使用 jest 完成测试内容，请先配置环境变量：username,password，**或者执行下面代码后在生成的目录中手动在neew的时候传参）**
+After installation, you can try running the files in the `examples` folder located under `/node_modules/physics-lab-web-api`. These include several preset scripts and usage examples.
 
-创建文件执行以下代码创建测试目录，接着按照提示运行 jest
+## Usage
 
-```javaScript
-const PL = require("physics-lab-web-api")
-PL.test()
-```
+Welcome to using `physics-lab-web-api` (hereafter referred to as `plapi`). After importing the relevant packages, you can directly call the provided methods. Please refer to the [Method List](./apilist.md) for a list of available methods.
 
-**目前已经放弃维护测试，安装后可以尝试运行/node_modules/physics-lab-web-api下examples下的文件**
+### `pl.User`
 
-## 使用方法
+When creating a new instance, please pass in the username and password. Passing `null` will automatically log in anonymously. If no parameters are passed, it will read the local environment variables `USERNAME` and `PASSWORD`; if these do not exist, it will log in anonymously. Some features may be restricted while logged in anonymously. Note that **parameters are not passed during login**.
 
-欢迎使用 physics-lab-web-api（以下简称 plapi）在导入相关包后，可以直接调用相关方法，在[方法列表](apilist.md)内查看方法列表，您也可以参考[api 接口文档](https://github.com/wsxiaolin/apidoc.git)的内容，文档内容不保证正确，本接口内容保证已经测试通过
+The response content from the Physics Lab API is complex, so we **strongly recommend printing out the returned content**.
 
-### pl.USer
+The documentation comments provide details about the parameters; your editor should automatically prompt you with this information. We strongly suggest reading through the documentation while coding.
 
-new 的时候请传入用户名和密码，传入null自动进行匿名登录，未传参数会读取本地环境变量USERNAME和PASSWORD，若不存在则匿名登录。匿名状态下部分功能可能会有限制，注意**不是在Login的时候传参**
-
-由于物实接口返回内容比较复杂，**强烈建议大家自己打印一下返回内容**
-
-参数的话文档注释有些写的，编辑器会自动提示的，强烈建议一遍翻着文档一遍 coding
-
-示例代码（更多请查看 examples 文件夹，会和包一起安装，放在插件目录下）：
+Sample code (more examples can be found in the `examples` folder, which is installed along with the package):
 
 ```javascript
 const User = require("physics-lab-web-api").User;
@@ -43,72 +34,72 @@ const User = require("physics-lab-web-api").User;
 async function main() {
   const user = new User();
   await user.auth.login();
-  const re = await user.messages.get("64df27eb738530998da62927", "User", 5);
-  re.Data.Comments.forEach((comment) => {
-    if (comment.UserID == "6382f6fcfee23205358026d6") return;
+  const result = await user.messages.get("64df27eb738530998da62927", "User", 5);
+  result.Data.Comments.forEach((comment) => {
+    if (comment.UserID === "6382f6fcfee23205358026d6") return;
     console.log(comment.Nickname, ": ", comment.Content);
   });
 }
 main();
 ```
 
-### pl.Bot
+### `pl.Bot`
 
-Bot继承自User，但是需要提供一些新的参数，标准流程如下：
+`Bot` inherits from `User` but requires additional parameters. The standard workflow is as follows:
 
-```javaScript
+```javascript
 const Bot = require("../src/index").Bot;
 
-async function processFunction(msg, botInstance) {
-  return "捕获成功";
+async function processFunction(message, botInstance) {
+  return "Capture successful";
 }
 
 const myBot = new Bot("xiegushi2022@outlook.com", "***", processFunction);
 
 async function main() {
-  await myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{});
+  await myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion", {}, {});
   myBot.start(5);
 }
 
 main();
-
 ```
-##### init（带有*的仍然在开发）
 
-- 前两个参数为回复的位置，为物实ID和类型（User,Experiment,Discussion）
-- *第三个参数为信息捕获策略
-- 第四个参数为机器人预制类型
+#### `init`
 
-直接上代码你就懂了，每个类型都有对应的介绍，对应逻辑实现都位于`node_modules/physics-lab-web-api/src/bot/`，里面可以在每个技能下方找到介绍.md：
-```JavaScript
-// 可选的机器人类型，只需填入name即可，例如：myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion",{},"wordle");
+- The first two parameters specify the location to reply, which are the Physics Lab ID (object serial number) and type (User, Experiment, Discussion).
+- The third parameter specifies the message capture strategy.
+- The fourth parameter specifies the pre-defined bot type.
+
+Here is a code snippet that explains each type, with corresponding implementations located in `node_modules/physics-lab-web-api/src/bot/`. You can find an introduction for each skill in the `introduction.md` files below them:
+
+```javascript
+// Optional bot types, just fill in the name, e.g.: myBot.init("6673ebf3d46f35b9aadcea6d", "Discussion", {}, "wordle");
 const botTypes = [
   {
-    name: "wordle", // 猜词游戏
+    name: "wordle", // Word guessing game
     process: wordle,
     replyConfig: { replyRequired: false, readHistory: false },
-  }, 
+  },
   {
-    name: "Wbotsmini", // 支持一定程度上设定提示词的bot
-    process:Wbotsmini,
+    name: "Wbotsmini", // Bot that supports setting prompt words to some extent
+    process: Wbotsmini,
     replyConfig: { replyRequired: false, readHistory: true },
-  }, 
+  },
 ];
 
-// 默认的信息捕获策略
-const defaltReplyConfig = {
-  ignoreReplyToOters: true, //忽略回复他人的信息
-  readHistiory: false, //是否读取开启前未回复的历史内容
-  replyRequired: true, // 是否只读取回复机器人的内容
+// Default message capture strategy
+const defaultReplyConfig = {
+  ignoreReplyToOthers: true, // Ignore replies to others
+  readHistory: false, // Whether to read unreplied historical content before startup
+  replyRequired: true, // Whether to only read messages that are replies to the bot
 };
 ```
 
+#### `start`
 
-##### start
+After calling `start`, the bot will first post a message indicating that it has started running. It will then periodically fetch information from the monitored location at the specified interval and automatically reply to messages. **Note**: The bot filters out messages that do not require a reply. In the future, we plan to provide rule configuration options similar to ESLint. If there are no messages to reply to, the console will not display any output.
 
-在调用start之后，首先会发布一条信息提示bot已经开始运行，之后会每隔参数时间获取一次监听位置的信息，并自动回复内容【注意：Bot会自动过滤无需回复的信息】【后续会考虑提供一些规则参数配置，类比eslint】【若没有需要回复的消息，控制台不会有任何输出】
+#### `processFunction`
 
-##### processFunction
-
-会被传入评论对象和Bot实例，返回值会被作为**回复用户**的内容，但是**如果指定了Bottype，该函数会被覆盖，可以不传**
-优先级：机器人类型自带 > 用户配置 > 默认值
+This function is passed the comment object and the bot instance. Its return value is used as the **reply to the user**. However, **if a bot type is specified, this function will be overridden and can be omitted**.
+Priority: Built-in bot type > User configuration > Default values
