@@ -29,7 +29,7 @@ async function uploadFile(filePath, t) {
 
 /**
  * 更新作品封面
- * @param {string} filename - 需要上传的图片文件名
+ * @param {string} filename - 需要上传的图片路径（本地）
  * @param {string} c - 作品分区
  * @param {number} i - 作品ID
  * @returns {Promise<void>} - 无返回值
