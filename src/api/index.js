@@ -7,7 +7,8 @@ const getDerivatives = require("./projects/getDerivatives");
 const getUser = require("./auth/getUser");
 const star = require("./projects/star");
 const emoticons = require("./messages/emoticons/index");
-const cover = require("./projects/conver")
+const cover = require("./projects/conver");
+const getExperiment = require("./projects/getExperiments");
 
 class User {
   constructor(username, password) {
@@ -33,10 +34,10 @@ class User {
         getSummary: getSummary.bind(this),
         getDerivatives: getDerivatives.bind(this),
         star: star.bind(this),
-        cover: cover.bind(this)
+        cover: cover.bind(this),
+        getExperiment: getExperiment.bind(this),
       });
   }
-  
 }
 
 module.exports = User;
