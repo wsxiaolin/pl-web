@@ -1,5 +1,5 @@
 const login = require("./auth/login");
-const getMessages = require("./messages/get");
+const GetComments = require("./messages/getComment");
 const sendMessages = require("./messages/send");
 const query = require("./projects/query");
 const getSummary = require("./projects/getSummary");
@@ -9,6 +9,7 @@ const star = require("./projects/star");
 const emoticons = require("./messages/emoticons/index");
 const cover = require("./projects/conver");
 const getExperiment = require("./projects/getExperiments");
+const getMessage = require("../api/messages/getMeaasge");
 
 class User {
   constructor(username, password) {
@@ -21,8 +22,9 @@ class User {
     }
 
     this.messages = {
-      get: getMessages.bind(this),
+      getComments: GetComments.bind(this),
       comment: sendMessages.bind(this),
+      getMessage: getMessage.bind(this),
       emoticons,
     };
     (this.auth = {

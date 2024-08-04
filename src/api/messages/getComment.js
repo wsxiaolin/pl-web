@@ -1,4 +1,4 @@
-const plrequest = require("../../api/axiosInstance");
+const plrequest = require("../axiosInstance");
 
 /**
  * 获取留言/评论信息，部分作品需要非匿名登录（传入用户名和密码）
@@ -21,7 +21,7 @@ module.exports = async function getMessages(
   take = -take;
   try {
     const response = await plrequest.post(
-      "/Messages/GetComments",
+      "Messages/GetComments",
       {
         TargetID: ID,
         TargetType: type,

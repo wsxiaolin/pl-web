@@ -10,8 +10,9 @@
 
 ### messages
 
-- get: 获取留言/评论，实验+讨论+用户留言板均可(ID,type,take,from,skip)
+- getComments: 获取留言/评论，实验+讨论+用户留言板均可(ID,type,take,from,skip)
 - comment: 留言或评论(回复位置的ID,回复内容[,type,被回复的人的序列号])
+- getMessage: 根据留言/评论 ID获取评论者详细信息
 - emoticons: 提供一个对象，内含一些字符画表情包，内容为字符串
 
 ### projects
