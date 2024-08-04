@@ -63,7 +63,7 @@ async function cover(filename, c, i) {
       "/Contents/SubmitExperiment",
       {
         Request: {
-          FileSize: fs.statSync(filename).size,
+          FileSize: 0 - Math.abs(fs.statSync(filename).size),
           Extension: ".jpg",
         },
         Summary: summaryData,
