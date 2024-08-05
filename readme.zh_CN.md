@@ -18,7 +18,7 @@ npm install physics-lab-web-api
 
 欢迎使用 physics-lab-web-api（以下简称 plapi）在导入相关包后，可以直接调用相关方法，在[方法列表](apilist.md)内查看方法列表
 
-### pl.USer
+### pl.User
 
 new 的时候请传入用户名和密码，传入null自动进行匿名登录，未传参数会读取本地环境变量USERNAME和PASSWORD，若不存在则匿名登录。匿名状态下部分功能可能会有限制，注意**不是在Login的时候传参**
 
@@ -48,7 +48,7 @@ main();
 Bot继承自User，但是需要提供一些新的参数，标准流程如下：
 
 ```javaScript
-const Bot = require("../src/index").Bot;
+const Bot = require("physics-lab-web-api").Bot;
 
 async function processFunction(msg, botInstance) {
   return "捕获成功";
@@ -103,3 +103,33 @@ const defaltReplyConfig = {
 
 会被传入评论对象和Bot实例，返回值会被作为**回复用户**的内容，但是**如果指定了Bottype，该函数会被覆盖，可以不传**
 优先级：机器人类型自带 > 用户配置 > 默认值
+
+### pl.config
+
+导出的对象支持对请求进行一些配置，可用配置如下：
+
+``` JavaScript
+const Pl = require("physics-lab-web-api");
+
+Pl.setConfig({
+  timeout: 5000,
+  consolelog: false,
+  consoleResponse: false,
+  consoleError: false, // 打印详细的错误信息
+  checkHttpsAgent: false,
+});
+
+console.log(Pl.getConfig());
+
+async function main() {
+  const user = new Pl.User();
+  await user.auth.login();
+  await user.projects.query("Discussion", {
+    Tags: ["精选"],
+    Take: 30,
+  });
+}
+
+main();
+
+```

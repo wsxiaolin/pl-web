@@ -1,5 +1,5 @@
 const login = require("./auth/login");
-const GetComments = require("./messages/getComment");
+const getComments = require("./messages/getComment");
 const sendMessages = require("./messages/send");
 const query = require("./projects/query");
 const getSummary = require("./projects/getSummary");
@@ -22,23 +22,23 @@ class User {
     }
 
     this.messages = {
-      getComments: GetComments.bind(this),
+      getComments: getComments.bind(this),
       comment: sendMessages.bind(this),
       getMessage: getMessage.bind(this),
       emoticons,
     };
-    (this.auth = {
+    this.auth = {
       login: login.bind(this),
       getUser: getUser.bind(this),
-    }),
-      (this.projects = {
-        query: query.bind(this),
-        getSummary: getSummary.bind(this),
-        getDerivatives: getDerivatives.bind(this),
-        star: star.bind(this),
-        cover: cover.bind(this),
-        getExperiment: getExperiment.bind(this),
-      });
+    };
+    this.projects = {
+      query: query.bind(this),
+      getSummary: getSummary.bind(this),
+      getDerivatives: getDerivatives.bind(this),
+      star: star.bind(this),
+      cover: cover.bind(this),
+      getExperiment: getExperiment.bind(this),
+    };
   }
 }
 

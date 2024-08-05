@@ -1,14 +1,9 @@
 const axios = require("axios");
-const config = require("./config")
+const configManager = require("./config");
 
-let requestConfig;
-
-const plrequest = axios.create({
-  httpsAgent: new (require("https").Agent)({
-    rejectUnauthorized: config.checkHttpsAgent,
-  }),
-  baseURL: config.baseURL,
-  timeout: config.timeout,
+let plrequest = axios.create({
+  baseURL: configManager.getConfig().baseURL,
+  timeout: configManager.getConfig().timeout,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -19,7 +14,9 @@ const plrequest = axios.create({
 
 plrequest.interceptors.request.use(
   function (config) {
-    requestConfig = config;
+    // Dynamically update baseURL and timeout based on current config
+    config.baseURL = configManager.getConfig().baseURL;
+    config.timeout = configManager.getConfig().timeout;
     return config;
   },
   function (error) {
@@ -28,23 +25,31 @@ plrequest.interceptors.request.use(
   }
 );
 
-plrequest.interceptors.response.use(function (response) {
-  if (response.data.Status !== 200) {
-    if (config.consoleError) {
-      console.log("--------physics-lab-web-api----------");
-      console.error("\x1b[31m%s\x1b[0m", response.data);
-      console.log("请求URL:", requestConfig.url);
-      console.log("请求头:", requestConfig.headers);
-      console.log("请求体:", JSON.parse(requestConfig.data));
+plrequest.interceptors.response.use(
+  function (response) {
+    let config = configManager.getConfig();
+    if (response.data.Status !== 200) {
+      if (config.consoleError) {
+        console.log("--------physics-lab-web-api----------");
+        console.error("\x1b[31m%s\x1b[0m", response.data);
+        console.log("请求URL:", response.config.url);
+        console.log("请求头:", response.config.headers);
+        console.log("请求体:", JSON.parse(response.config.data));
+      }
+      throw new Error("physics-lab-web-api请求未成功");
+    } else {
+      if (config.consolelog) {
+        console.log("\x1b[32m%s\x1b[0m", response.config.url);
+      }
+      if (config.consoleResponse) {
+        console.log(response.data.Data);
+      }
     }
-    throw new Error("physics-lab-web-api请求未成功");
-  } else {
-    (config.consolelog || config.consoleResponse) &&
-      console.log("\x1b[32m%s\x1b[0m", requestConfig.url);
-
-    config.consoleResponse && console.log(response.data.Data);
+    return response;
+  },
+  function (error) {
+    return Promise.reject(error);
   }
-  return response;
-});
+);
 
 module.exports = plrequest;
