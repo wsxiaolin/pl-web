@@ -23,3 +23,4 @@
 - star: 收藏作品（可匿名）
 - cover: 更新封面
 - getExperiment: 获取实验存档
+- getSupporters: 获取作品支持者

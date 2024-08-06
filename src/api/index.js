@@ -10,6 +10,7 @@ const emoticons = require("./messages/emoticons/index");
 const cover = require("./projects/conver");
 const getExperiment = require("./projects/getExperiments");
 const getMessage = require("../api/messages/getMeaasge");
+const getSupporters = require("./projects/getSupporters");
 
 class User {
   constructor(username, password) {
@@ -38,6 +39,7 @@ class User {
       star: star.bind(this),
       cover: cover.bind(this),
       getExperiment: getExperiment.bind(this),
+      getSupporters: getSupporters.bind(this),
     };
   }
 }
