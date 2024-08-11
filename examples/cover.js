@@ -4,9 +4,9 @@ async function main() {
   await user.auth.login();
   await user.projects
     .cover(
-      "/sdcard/Pictures/Screenshots/Screenshot_20240731_205237_com.miHoYo.hkrpg.jpg",
+      "/sdcard/Pictures/Screenshots/Screenshot_20240807_101242_com.huawei.browser.jpg",
       "Discussion",
-      "66aa607c123cc96d5ffbb5c7"
+      "66b2d93a197f935d74b46c6e"
     )
     .then(() => {
       console.log("成功");

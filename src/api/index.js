@@ -23,7 +23,7 @@ class User {
     }
 
     this.messages = {
-      getComments: getComments.bind(this),
+      get: getComments.bind(this),
       comment: sendMessages.bind(this),
       getMessage: getMessage.bind(this),
       emoticons,
