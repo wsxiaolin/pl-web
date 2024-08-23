@@ -1,6 +1,6 @@
 {
   "name": "physics-lab-web-api",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "src/index.js",
   "scripts": {
     "test": "npx jest"
