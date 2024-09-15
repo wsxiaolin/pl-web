@@ -19,29 +19,24 @@ module.exports = async function getMessages(
 ) {
   if (take > 100) throw new Error("消息获取数量一次最多为100条");
   take = -take;
-  try {
-    const response = await plrequest.post(
-      "Messages/GetComments",
-      {
-        TargetID: ID,
-        TargetType: type,
-        CommentID: from,
-        Take: take,
-        Skip: skip,
+  const response = await plrequest.post(
+    "Messages/GetComments",
+    {
+      TargetID: ID,
+      TargetType: type,
+      CommentID: from,
+      Take: take,
+      Skip: skip,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": "zh-CN",
+        "x-API-Token": this.token,
+        "x-API-AuthCode": this.authCode,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Accept-Language": "zh-CN",
-          "x-API-Token": this.token,
-          "x-API-AuthCode": this.authCode,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw "获取信息出错";
-  }
+    }
+  );
+  return response.data;
 };

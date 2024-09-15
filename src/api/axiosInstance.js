@@ -1,5 +1,6 @@
 const axios = require("axios");
 const configManager = require("./config");
+const util = require("util");
 
 let plrequest = axios.create({
   baseURL: configManager.getConfig().baseURL,
@@ -12,44 +13,39 @@ let plrequest = axios.create({
   },
 });
 
-plrequest.interceptors.request.use(
-  function (config) {
-    // Dynamically update baseURL and timeout based on current config
-    config.baseURL = configManager.getConfig().baseURL;
-    config.timeout = configManager.getConfig().timeout;
-    return config;
-  },
-  function (error) {
-    error.response && console.error(error.response);
-    return Promise.reject(error.messages);
-  }
-);
+plrequest.interceptors.request.use(function (config) {
+  const { baseURL, timeout } = configManager.getConfig();
+  config.baseURL = baseURL;
+  config.timeout = timeout;
+  return config;
+});
 
-plrequest.interceptors.response.use(
-  function (response) {
-    let config = configManager.getConfig();
-    if (response.data.Status !== 200) {
-      if (config.consoleError) {
-        console.log("--------physics-lab-web-api----------");
-        console.error("\x1b[31m%s\x1b[0m", response.data);
-        console.log("请求URL:", response.config.url);
-        console.log("请求头:", response.config.headers);
-        console.log("请求体:", JSON.parse(response.config.data));
-      }
-      throw new Error("physics-lab-web-api请求未成功");
-    } else {
-      if (config.consolelog) {
-        console.log("\x1b[32m%s\x1b[0m", response.config.url);
-      }
-      if (config.consoleResponse) {
-        console.log(response.data.Data);
-      }
+plrequest.interceptors.response.use(function (response) {
+  let config = configManager.getConfig();
+  if (response.data.Status !== 200) {
+    if (config.consoleError) {
+      const detail = {
+        header: response.config.headers.toJSON
+          ? response.config.headers.toJSON()
+          : response.config.headers,
+        url: configManager.getConfig().baseURL + response.config.url,
+        body: JSON.parse(response.config.data),
+      };
+      console.log("\x1b[36m%s\x1b[0m", "--------physics-lab-web-api----------");
+      console.log(util.inspect(detail, { colors: true, depth: null }));
+      console.log("\x1b[31m%s\x1b[0m", response.data);
+      console.log("\x1b[36m%s\x1b[0m", "--------physics-lab-web-api----------");
     }
     return response;
-  },
-  function (error) {
-    return Promise.reject(error);
+  } else {
+    if (config.consolelog) {
+      console.log("\x1b[32m%s\x1b[0m", response.config.url);
+    }
+    if (config.consoleResponse) {
+      console.log(response.data.Data);
+    }
+    return response;
   }
-);
+});
 
 module.exports = plrequest;

@@ -12,47 +12,42 @@ const plrequest = require("../../api/axiosInstance");
  * @return {*}
  */
 module.exports = async function queryExperiments(type, query) {
-  try {
-    let q = {
-      Category: type,
-      Languages: [],
-      ExcludeLanguages: null,
-      Tags: [],
-      ModelTags: null,
-      ExcludeTags: null,
-      ModelID: null,
-      ParentID: null,
-      UserID: null,
-      Special: null,
-      From: null,
-      Skip: 0,
-      Take: 8,
-      Days: 0,
-      Sort: 0,
-      ShowAnnouncement: false,
-      ...query, //覆盖默认值,
-    };
-    if (q.Take > 100) throw new Error("消息获取数量一次最多为100条");
-    q.Take = -q.Take;
-    const response = await plrequest.post(
-      "/Contents/QueryExperiments",
-      {
-        Query: q,
-      },
+  let q = {
+    Category: type,
+    Languages: [],
+    ExcludeLanguages: null,
+    Tags: [],
+    ModelTags: null,
+    ExcludeTags: null,
+    ModelID: null,
+    ParentID: null,
+    UserID: null,
+    Special: null,
+    From: null,
+    Skip: 0,
+    Take: 8,
+    Days: 0,
+    Sort: 0,
+    ShowAnnouncement: false,
+    ...query, //覆盖默认值,
+  };
+  if (q.Take > 100) throw new Error("消息获取数量一次最多为100条");
+  q.Take = -q.Take;
+  const response = await plrequest.post(
+    "/Contents/QueryExperiments",
+    {
+      Query: q,
+    },
 
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Accept-Language": "zh-CN",
-          "x-API-Token": this.token,
-          "x-API-AuthCode": this.authCode,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw "获取信息出错";
-  }
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": "zh-CN",
+        "x-API-Token": this.token,
+        "x-API-AuthCode": this.authCode,
+      },
+    }
+  );
+  return response.data;
 };

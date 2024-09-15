@@ -7,25 +7,20 @@ const plrequest = require("../axiosInstance");
  */
 
 module.exports = async function getMessages(ID) {
-  try {
-    const response = await plrequest.post(
-      "Messages/GetMessage",
-      {
-        MessageID: ID,
+  const response = await plrequest.post(
+    "Messages/GetMessage",
+    {
+      MessageID: ID,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": "zh-CN",
+        "x-API-Token": this.token,
+        "x-API-AuthCode": this.authCode,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Accept-Language": "zh-CN",
-          "x-API-Token": this.token,
-          "x-API-AuthCode": this.authCode,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw "获取信息出错";
-  }
+    }
+  );
+  return response.data;
 };

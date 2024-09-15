@@ -7,29 +7,24 @@ const plrequest = require("../axiosInstance");
  * @param {boolean} status - true为收藏，false为取消
  */
 module.exports = async function star(id, type, status) {
-  try {
-    const response = await plrequest.post(
-      "/Contents/StarContent",
-      {
-        ContentID: id,
-        Status: status,
-        Category: type,
-        type: 0,
-      },
+  const response = await plrequest.post(
+    "/Contents/StarContent",
+    {
+      ContentID: id,
+      Status: status,
+      Category: type,
+      type: 0,
+    },
 
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Accept-Language": "zh-CN",
-          "x-API-Token": this.token,
-          "x-API-AuthCode": this.authCode,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw "获取信息出错";
-  }
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": "zh-CN",
+        "x-API-Token": this.token,
+        "x-API-AuthCode": this.authCode,
+      },
+    }
+  );
+  return response.data;
 };

@@ -1,7 +1,7 @@
 const User = require("../src/index").User;
 
 async function get() {
-  const user = new User()
+  const user = new User(null, null);
   await user.auth.login();
   const re = await user.messages.get("62d3fd092f3a2a60cc8ccc9e", "User", 5);
   re.Data.Comments.forEach((comment) => {
@@ -10,12 +10,15 @@ async function get() {
   });
 }
 
-
 async function send() {
-  const user = new User()
+  const user = new User();
   await user.auth.login();
   console.log(user.token);
-  const re = await user.messages.comment("64df27eb738530998da62927",user.messages.emoticons.huaji,"User")
+  const re = await user.messages.comment(
+    "64df27eb738530998da62927",
+    user.messages.emoticons.huaji,
+    "User"
+  );
   console.log(re);
 }
 

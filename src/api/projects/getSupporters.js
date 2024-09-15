@@ -8,29 +8,24 @@ const plrequest = require("../axiosInstance");
  * @param {Number} skip - 跳过的数量，比如第一次Skip 0, Take 50之后看看是不是有五十条，如果是就Skip 50, Take 50
  */
 module.exports = async function getSupportersy(id, type, take = 50, skip = 0) {
-  try {
-    const response = await plrequest.post(
-      "/Contents/GetSupporters",
-      {
-        ContentID: id,
-        Category: type,
-        Skip: skip,
-        Take: take,
-      },
+  const response = await plrequest.post(
+    "/Contents/GetSupporters",
+    {
+      ContentID: id,
+      Category: type,
+      Skip: skip,
+      Take: take,
+    },
 
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Accept-Language": "zh-CN",
-          "x-API-Token": this.token,
-          "x-API-AuthCode": this.authCode,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw "获取信息出错";
-  }
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": "zh-CN",
+        "x-API-Token": this.token,
+        "x-API-AuthCode": this.authCode,
+      },
+    }
+  );
+  return response.data;
 };
