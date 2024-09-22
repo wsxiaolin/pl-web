@@ -8,7 +8,9 @@ const getUser = require("./auth/getUser");
 const star = require("./projects/star");
 const emoticons = require("./messages/emoticons/index");
 const cover = require("./projects/conver");
-const getExperiment = require("./projects/getExperiments");
+const getExperiment = require("./projects/getExperiment");
+
+const updateExperiment = require("./projects/update");
 const getMessage = require("../api/messages/getMeaasge");
 const getSupporters = require("./projects/getSupporters");
 
@@ -40,6 +42,7 @@ class User {
       cover: cover.bind(this),
       getExperiment: getExperiment.bind(this),
       getSupporters: getSupporters.bind(this),
+      update:updateExperiment.bind(this)
     };
   }
 }
